@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>smk tunas pemuda</title>
+<link rel="shortcut icon" href="https://i.imgur.com/dwWBpTO.png" type="png">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet"> 
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Poppins',sans-serif;
+}
+body{
+  background:linear-gradient(135deg,#ffffff,#e6f0ff);
+  color:#1e3a8a;
+  overflow-x:hidden;
+}
+
+#loading{
+  position:fixed;
+  inset:0;
+  background:#ffffff;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  z-index:9999;
+  transition:opacity 0.6s ease,visibility 0.6s ease;
+}
+#loading.hide{
+  opacity:0;
+  visibility:hidden;
+}
+.loader-logo{
+  width:100px;
+  height:100px;
+  border:8px solid #c7d2fe;
+  border-top:8px solid #1e3a8a;
+  border-radius:50%;
+  animation:spin 1.2s linear infinite;
+}
+@keyframes spin{
+  to{transform:rotate(360deg);}
+}
+.typing{
+  font-size:20px;
+  margin-top:20px;
+  color:#1e3a8a;
+  border-right:3px solid #1e3a8a;
+  white-space:nowrap;
+  overflow:hidden;
+  width:0;
+  animation: typing 2s steps(12) 1s forwards, blink 0.6s step-end infinite alternate;
+}
+@keyframes typing{to{width:120px;}}
+@keyframes blink{50%{border-color:transparent;}}
+
+header{
+  text-align:center;
+  padding:50px 20px 30px;
+  animation:fadeDown 1s ease;
+}
+header h1{
+  font-size:1.7em;
+  color:#1e40af;
+}
+header p{
+  font-size:1.1em;
+  color:#3b82f6;
+}
+@keyframes fadeDown{
+  from{opacity:0;transform:translateY(-30px);}
+  to{opacity:1;transform:translateY(0);}
+}
+
+section{
+  padding:60px 20px;
+  text-align:center;
+  opacity:0;
+  transform:translateY(40px);
+  transition:all 0.8s ease;
+}
+section.show{
+  opacity:1;
+  transform:translateY(0);
+}
+section h2{
+  font-size:1.8em;
+  margin-bottom:20px;
+  color:#1d4ed8;
+}
+section p{
+  max-width:700px;
+  margin:auto;
+  font-size:1em;
+  color:#1e3a8a;
+}
+
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 30px;
+}
+
+.card {
+  background: #fff;
+  border-radius: 15px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  width: 150px; 
+  padding: 20px;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.card1 {
+  background: #fff;
+  border-radius: 15px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  width: 280px; 
+  padding: 20px;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.card:hover{
+  transform:translateY(-10px);
+  box-shadow:0 10px 20px rgba(0,0,0,0.15);
+}
+.card i{
+  font-size:40px;
+  color:#3b82f6;
+  margin-bottom:15px;
+}
+
+footer{
+  background:#1e3a8a;
+  color:#fff;
+  text-align:center;
+  padding:20px;
+  margin-top:50px;
+}
+footer p {
+  font-size: 12px;
+}
+footer i{
+  color:#3b8;
+  margin:20px 15px;
+  font-size:18px;
+  transition:transform 0.3s;
+}
+footer i:hover{
+  transform:scale(1.2);
+}
+h4{
+  font-size:1.7em;
+  color:#1e40af;
+}
+.scroll-down {
+  position: absolute;
+  top: 180px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #007bff;
+  font-size: 25px;
+  animation: bounce 1.5s infinite;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translate(-50%, 0); }
+  50% { transform: translate(-50%, -10px); }
+}
+.quotes {
+  padding: 60px 20px;
+  text-align: center;
+  background: rgba(255,255,255,0.1);
+  animation: fadeIn 1s ease;
+}
+
+.quotes blockquote {
+  font-size: 20px;
+  color: #007bff;
+  font-style: italic;
+  margin: 20px auto;
+  max-width: 700px;
+}
+.skills {
+  padding: 60px 20px;
+  text-align: center;
+  background: rgba(255,255,255,0.1);
+  animation: fadeIn 1s ease;
+}
+
+.skills h2 {
+  color: #007bff;
+  margin-bottom: 30px;
+  font-size: 26px;
+}
+
+.skill-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 25px;
+}
+
+.skill {
+  background: white;
+  width: 130px;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  transition: 0.3s ease;
+}
+
+.skill:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+.skill i {
+  font-size: 36px;
+  color: #007bff;
+  margin-bottom: 10px;
+}
+.teacher {
+  padding: 60px 20px;
+  text-align: center;
+  animation: fadeIn 1s ease;
+}
+
+.teacher h2 {
+  color: #007bff;
+  margin-bottom: 25px;
+  font-size: 26px;
+}
+
+.teacher-card {
+  background: white;
+  width: 300px;
+  margin: 0 auto;
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  transition: 0.4s ease;
+}
+
+.teacher-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+}
+
+.teacher-card i {
+  font-size: 50px;
+  color: #007bff;
+  margin-bottom: 15px;
+}
+.card a {
+  list-style: none;
+  text-decoration: none;
+  text-direction: none;
+}
+.card3 {
+  color: #034081;
+  margin:5px;
+  backdrop-filter: blur(8px);
+  background: white;
+  padding: 20px;
+  border-radius: 25px;
+  font-weight: 600;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  transition: 0.25s;
+  box-shadow: 0 0 15px rgba(255,255,255,0.06);
+}
+.card1:hover {
+  transform: translateY(-6px);
+}
+</style>
+</head>
+<body>
+
+<div id="loading">
+  <div style="font-size:28px;"><i class="fa-solid fa-school"></i> <b>Tunas Pemmuda</b> </div>
+  <div class="typing">Loading...</div>
+</div>
+
+<header>
+  <h1 data-aos="zoom-in-down" data-aos-duration="5000"><i class="fa-solid fa-laptop-code"></i> SMK TUNAS PEMUDA</h1>
+  <h4 data-aos="zoom-in-down" data-aos-duration="5000">rajeg</h4>
+  <p data-aos="zoom-in-down" data-aos-duration="5000"> Kreatif, Inovatif, Profesional</p>
+  <div class="scroll-down"><i class="fas fa-chevron-down"></i></div>
+</header>
+<section id="about">
+  <h2 data-aos="zoom-in" data-aos-duration="5000"><i class="fa-solid fa-users"></i> Tentang Sekolah</h2>
+  <p align="justify" data-aos="zoom-in-right" data-aos-duration="5000"> SMK TUNAS PEMUDA adalah sebuah sekolah menengah kejuruan (SMK)
+    swasta di daerah Kabupaten tangerang, banten, tepatnya di jl.kh.m.dahlan no.11 tanjakan indah, rajeg
+</p><br>
+  <p align="justify" data-aos="zoom-in-left" data-aos-duration="5000">sekolah ini fokus pada pembentukan karakter Siswa dengan nilai keagamaan dan keterampilan untuk siap kerja melalui berbagai program 
+ungggulan seperti pengembangan potensi, keterampilan teknologi, dan budaya daerah serta memiliki banyak kegiatan ekstrakulikuler.
+  </p><br>
+  <p align="justify"><b>informasi penting :</b> <br> nama sekolah : smks tunas pemuda, <br> status : swasta, <br> npsn : 20615878, <br> kec: rajeg, <br> kab: Tangerang</p>
+  </section>
+
+  <section id="visi-misi">
+    <h2 data-aos="zoom-in" data-aos-duration="2000"><i class="fa-solid fa-list-check"></i> visi-misi</h2>
+   <p align="justify" data-aos="zoom-in" data-aos-duration="2000">
+     Demi menjalankan kegiatan belajar dengan lancar, Politeknik yang ada di Banten ini memiliki visi dan misi yang dipegang teguh hingga saat ini. Visi dari smk TUNAS PEMUDA adalah menjadi politeknik yang unggul dalam bersaing di dunia kerja. Selain itu, smk TUNAS PEMUDA berharap mampu membangun masyarakat Tangerang yang sejahtera untuk menyambut tahun yang akan mendatang.
+     </p><br>
+ 
+ <p align="justify" data-aos="zoom-in" data-aos-duration="2000">
+ Selanjutnya misi yang dilakukan adalah menyelenggarakan pendidikan secara profesional agar menghasilkan lulusan yang mampu bekerja sama, terampil, berbudi pekerti luhur, inovatif, rajin dan ulet, serta memiliki daya saing yang tinggi. Lalu, misi kedua adalah mengembangkan penelitian yang bisa diterapkan langsung di masyarakat. Selain itu, memajukan pembangunan nasional melalui IPTEK.
+ </p><br>
+ 
+ <p align="justify" data-aos="zoom-in" data-aos-duration="2000">
+ Misi ketiga dari Politeknik Tunas Pemuda adalah memberikan pelayanan secara nyata untuk pengembangan kehidupan dan kebudayaan yang ada di masyarakat. Nah, misi terakhir yang ingin dilakukan dengan mengembangkan kemitraan dengan pemangku kepentingan yang berasal dari pihak eksternal untuk mendukung kegiatan pembelajaran yang berlangsung di smk TUNAS PEMUDA.
+ </p><br>
+ </section>
+
+ <section id="fasilitas">
+  <h2 data-aos="zoom-in" data-aos-duration="2000"><i class="fa-solid fa-list-check"></i> Fasilitas</h2>
+ <p align="justify" data-aos="zoom-in" data-aos-duration="2000">
+1. mushola <i class="fa-solid fa-mosque"> </i>, mushola di sekolah di sediakan bagi siswa dan Guru untuk melaksanakan ibadah dengan nyaman. tempat bersih, dan tenang.
+di mushola sudah di sediakan alat sholat: sarung, mukena, dan sajadah
+</p><br>
+
+<p align="justify" data-aos="zoom-in" data-aos-duration="2000">
+2. perpustakaan <i class="fa-solid fa-book-bookmark"> </i>, perpustakaan sekolah menyediakan berbagai macam buku pembelajaran, reverensi, dan bacaan umum. ruangannya nyaman dan tenang cocok untuk membaca, belajar sendiri, atau mengerjakan tugas.
+</p><br>
+
+<p align="justify" data-aos="zoom-in" data-aos-duration="2000">
+3. parkiran <i class="fa-solid fa-motorcycle"> </i>, area parkir sekolah menyediakan tempat yang aman dan luas bagi siswa, Guru, serta tamu. lokasi nya di dalam sekolah tertata rapi agar kendaraan bisa terparkir dengan teratur dan tidak mengganggu aktivitas sekolah
+</p><br>
+
+<p align="justify" data-aos="zoom-in" data-aos-duration="2000">
+  4. toilet <i class="fa-solid fa-restroom"> </i>, toilet sekolah di sediakan untuk kenyamanan seluruh warga sekolah. fasilitas bersih dan terawat. toilet antara laki-laki dan perempuan di pisah agar siswa merasakan aman dan nyaman saat digunakan.
+  </p><br>
+
+  <p align="justify" data-aos="zoom-in" data-aos-duration="2000">
+  5. lab.komputer <i class="fa-solid fa-computer"> </i>, lab komputer di sekolah di sediakan sebagai tempat pembelajaran teknologi dan praktik komputer
+  di lengkapi perangkat modern, internet, dan software pendukung yang membantu siswa menguasai keterampilan komputer.
+  </p><br>
+
+  <p align="justify" data-aos="zoom-in" data-aos-duration="2000">
+    6. bengkel <i class="fa-solid fa-screwdriver-wrench"> </i>, bengkel sekolah merupakan tempat praktik bagi siswa jurusan otomotif. didalam nya tersedia
+    peralatan lengkap dan mesin praktik untuk mendukung pembelajaran langsung sesuai kebutuhan
+    dunia industri.   
+  </p><br>
+
+    <p align="justify" data-aos="zoom-in" data-aos-duration="2000">
+      7. ruang uks <i class="fa-solid fa-briefcase-medical"> </i>, ruang uks berfungsi sebagai tempat pertolongan pertama bagi siswa yang mengalami sakit ringan atau cedera. di lengkapi perlengkapan medis dasar, kasur perawatan, dan di jaga oleh petugas yang siap membantu.
+      </p><br>
+
+      <p align="justify" data-aos="zoom-in" data-aos-duration="2000">
+        8. kantin <i class="fa-solid fa-hamburger"> </i>, kantin sekolah menjadi tempat siswa
+        membeli makanan dan minuman dengan harga terjangkau.
+      </p><br>
+
+        <p align="justify" data-aos="zoom-in" data-aos-duration="2000">
+          10. lapangan <i class="fa-solid fa-person-running"> </i>, lapangan sekolah digunakan untuk kegiatan olahraga, 
+          upacara, dan acara besar Sekolah. area ini luas aman, serta menjadi tempat siswa mengembangkan minat dan bakat
+          di bidang olahraga.
+        </p><br>
+</section>
+
+<section id="jurusan">
+  <h2 data-aos="zoom-in-up" data-aos-duration="2000"><i class="fas fa-chalkboard-teacher"></i> jurusan</h2>
+  <p align="justify" data-aos="zoom-in" data-aos-duration="2000">
+    di sekolah kami terdapat beberapa jurusan unggulan yang di rancang untuk mengembangkan kemampuan siswa sesuai 
+    minat dan bakatnya. setiap jurusan memmiliki kurikulum yang relavan dengan kebutuhan 
+    dunia kerja, dilengkapi dengan praktik langsung, fasilitas yang memadai, serta bimbimbangan dari guru guru berpengalaman 
+    dengan adanya berbagai jurusan, kami berharap siswa dapat memilih bidang yang paling sesuai sehingga mampu berkembang secara maksimal 
+    berkomitmen, dan siap bersaing di dunia industri maupun wirausahawan mandiri. berikut beberapa jurusan 
+    yang ada di smk tunas pemuda.
+  </p><br>
+    <div class="teacher-card" data-aos="zoom-in-up" data-aos-duration="2000">
+    <i class="fas fa-code"></i>
+    <h3>Rekayasa perangkat lunak </h3><br>
+    <p align="justify" data-aos="zoom-in" data-aos-duration="2000">
+      Rekayasa perangkat lunak adalah salah satu jurusan di bidang teknologi informasi yang fokus mempelajari cara 
+      membuat, mengembangkan, dan memelihara perangkat lunak (software).
+      jurusan rpl di smk tunas pemuda mencetak generasi muda yang ahli dalam bidang
+      pengembangan perangkat lunak, desain antarmuka, dan pemrograman modern. kami fokus 
+      pada inovasi dan kerja nyata untuk masa depan digital indonesia.
+    </p>
+  </div><br>
+
+  <div class="teacher-card" data-aos="zoom-in-up" data-aos-duration="2000">
+    <i class="fas fa-folder-open"></i>
+    <h3>Management perkantoran</h3><br>
+    <p align="justify" data-aos="zoom-in" data-aos-duration="2000">
+      mp adalah jurusan yang fokus mempelajari pengelolaan administrasi perkantoran, 
+      pelayanan public, pengarsipan, surat menyurat, dan penggunaan teknologi perkantoran 
+      modern. 
+      jurusan mp di smk tunas pemuda mencetak siswa yang disiplin, cekatan, ramah, dan 
+      profesional dalam dunia perkantoran modern.
+    </p>
+  </div><br>
+
+  <div class="teacher-card" data-aos="zoom-in-up" data-aos-duration="2000">
+    <i class="fas fa-chart-line"></i>
+    <h3>BDP</h3><br>
+    <p align="justify" data-aos="zoom-in" data-aos-duration="2000">
+      bdp adalah jurusan fokus pada pemasaran modern, bisnis online, branding, jualan digital, 
+      sampai bikin konten. 
+      jurusan bdp di smk tunas pemuda mempersiapkan siswa jadi generasi bisnis yang kreatif, komunitip, dan melek digital.
+    </p>
+  </div><br>
+
+  <div class="teacher-card" data-aos="zoom-in" data-aos-duration="2000">
+    <i class="fas fa-wrench"> </i>
+    <h3>Tsm</h3>
+    <p align="justify" data-aos="zoom-in" data-aos-duration="2000">
+      tsm adalah jurusan yang mempelajari perawatan, perbaikan, servis, dan di agnosa motor. 
+      jurusan tsm di smk tunas pemuda mencetak siswa yang terampil, teknis, dan siap terjun 
+      ke dunia otomotif profesional.
+    </p> 
+  </div><br>
+
+  <div class="teacher-card" data-aos="zoom-in" data-aos-duration="2000">
+    <i class="fas fa-money-bill-wave"> </i>
+    <h3>Akl</h3>
+    akl adalah jurusan yang mempelajari keuangan, akuntansi, pencatatan, transaksi, pembukuan, dan laporan keuangan. 
+    jurusan akl di smk tunas pemuda mencetak siswa yang siap kerja di dunia perbankan, kantor, dan lembaga keuangan modern.
+  </div>
+</section>
+
+
+<section class="teacher">
+  <h2 data-aos="zoom-in-up" data-aos-duration="2000"><i class="fas fa-user-tie"></i> kepala sekolah </h2>
+  <div class="teacher-card" data-aos="zoom-in-up" data-aos-duration="2000">
+    <i class="fas fa-user-tie"></i>
+    <h3>Tri Hartono</h3>
+    <p>Kepala sekolah smk tunas pemuda</p>
+  </div>
+</section>
+
+<section id="eskul">
+  <h2 data-aos="zoom-in" data-aos-duration="2000">ekstrakulikuler</h2>
+  <p align="justify" data-aos="zoom-in" data-aos-duration="2000">
+    ekstrakulikuler adalah kegiatan tambahan di lua jam pembelajaran yang bertujuan untuk 
+    mengembangkan minat, bakat, karakter, dan potensi siswa. melalui kegiatan ini, siswa dapat 
+    belajar bekerja sama, melatih kedisplinan, menambah pengalaman, serta meningkatkan kemampuan non-akademik 
+    yang tidak di peroleh di kelas. ekstrakulikuler juga menjadi wadah bagi siswa untuk mengekspresikan diri, mengasah 
+    kreativitas, dan membangun kepercayaan diri, sehinnga terbentuk pribadi yang lebih aktif, terampil, dan berprestasi. 
+    berikut list ekstrakulikuler yang tersedia di smk tunas pemuda rajeg :
+  </p>
+  <div data-aos="zoom-in" data-aos-duration="200" class="card3">pramuka</div><br>
+  <div data-aos="zoom-in" data-aos-duration="200" class="card3">drumband</div><br>
+  <div data-aos="zoom-in" data-aos-duration="200" class="card3">futsal</div><br>
+  <div data-aos="zoom-in" data-aos-duration="200" class="card3">karate</div><br>
+  <div data-aos="zoom-in" data-aos-duration="200" class="card3">nari</div><br>
+  <div data-aos="zoom-in" data-aos-duration="200" class="card3">hadroh</div><br>
+  <div data-aos="zoom-in" data-aos-duration="200" class="card3">basket</div><br>
+</section>
+
+<section id="members">
+  <h2 data-aos="zoom-in-up" data-aos-duration="2000"><i class="fa-solid fa-chalkboard-teacher"></i> Anggota Kelas</h2>
+  <div class="cards">
+    <div class="card" data-aos="zoom-in-up" data-aos-duration="2000"><i class="fa-solid fa-user"></i><h3>giatno</h3><p>pkn</p></div>
+    <div class="card" data-aos="zoom-in-up" data-aos-duration="2000"><i class="fa-solid fa-user"></i><h3>mulyadi</h3><p>bhs.inggiris</p></div>
+    <div class="card" data-aos="zoom-in-up" data-aos-duration="2000"><i class="fa-solid fa-user"></i><h3>saepul</h3><p>staf tu</p></div>
+    <div class="card" data-aos="zoom-in-up" data-aos-duration="2000"><i class="fa-solid fa-user"></i><h3>enka</h3><p>kesiswaan</p></div>
+    <div class="card" data-aos="zoom-in-up" data-aos-duration="2000"><i class="fa-solid fa-user"></i><h3>hadi malik</h3><p>kwr</p></div>
+    <div class="card" data-aos="zoom-in-up" data-aos-duration="2000"><i class="fa-solid fa-user"></i><h3>jarudi</h3><p>agama</p></div>
+    <div class="card" data-aos="zoom-in-up" data-aos-duration="2000"><i class="fa-solid fa-user"></i><h3>yuyun</h3><p>bhs. arab</p></div>
+    <div class="card" data-aos="zoom-in-up" data-aos-duration="2000"><i class="fa-solid fa-user"></i><h3>maulida</h3><p>pemrograman web</p></div>
+    <div class="card" data-aos="zoom-in-up" data-aos-duration="2000"><i class="fa-solid fa-user"></i><h3>tika</h3><p>bhs. indonesia</p></div>
+    <div class="card" data-aos="zoom-in-up" data-aos-duration="2000"><i class="fa-solid fa-user"></i><h3>devi</h3><p>konseling</p></div>
+    <div class="card" data-aos="zoom-in-up" data-aos-duration="2000"><i class="fa-solid fa-user"></i><h3>shirot</h3><p>kkn</p></div>
+    <div class="card" data-aos="zoom-in-up" data-aos-duration="2000"><i class="fa-solid fa-user"></i><h3>toyibah</h3><p>laporan pkl</p></div>
+    <div class="card" data-aos="zoom-in-up" data-aos-duration="2000"><i class="fa-solid fa-user"></i><h3>tuti</h3><p>bhs. inggris</p></div>
+    <div class="card" data-aos="zoom-in-up" data-aos-duration="2000"><i class="fa-solid fa-user"></i><h3>maya</h3><p> </p></div>
+    <div class="card" data-aos="zoom-in-up" data-aos-duration="2000"><i class="fa-solid fa-user"></i><h3>ade</h3><p> </p></div>
+    <div class="card" data-aos="zoom-in-up" data-aos-duration="2000"><i class="fa-solid fa-user"></i><h3>hernia</h3><p> </p></div>
+    <div class="card" data-aos="zoom-in-up" data-aos-duration="2000"><i class="fa-solid fa-user"></i><h3>kokom</h3><p> </p></div>
+    <div class="card" data-aos="zoom-in-up" data-aos-duration="2000"><i class="fa-solid fa-user"></i><h3>novi</h3><p> </p></div>
+    <div class="card"data-aos="zoom-in-up" data-aos-duration="2000"><i class="fa-solid fa-user"></i><h3>ruri</h3><p> </p></div>
+    <div class="card" data-aos="zoom-in-up" data-aos-duration="2000"><i class="fa-solid fa-user"></i><h3>uum</h3><p> </p></div>
+    <div class="card" data-aos="zoom-in-up" data-aos-duration="2000"><i class="fa-solid fa-user"></i><h3>muti</h3><p> </p></div>
+    <div class="card" data-aos="zoom-in-up" data-aos-duration="2000"><i class="fa-solid fa-user"></i><h3>ari</h3><p> </p></div>
+    <div class="card" data-aos="zoom-in-up" data-aos-duration="2000"><i class="fa-solid fa-user"></i><h3>anton</h3><p> </p></div>
+    <div class="card" data-aos="zoom-in-up" data-aos-duration="2000"><i class="fa-solid fa-user"></i><h3>supri</h3><p> </p></div>
+  </div>
+</section>
+
+<section id="projects" data-aos="zoom-in-up" data-aos-duration="2000">
+  <h2><i class="fa-solid fa-code"></i> Project siswa jurusan rpl</h2>
+  <div class="cards">
+    <div class="card" data-aos="zoom-in-up" data-aos-duration="2000">
+      <a href="https://zharhosting88.github.io/App_Kasir_By_Rpl2/App-Kasir" target="_blank">
+      <i class="fa-solid fa-globe"></i><h3>Aplikasi kasir</h3><p>Websit kasir (app kasir digital) dengan desain interaktif.</p>
+      </a>
+      </div>
+    <div class="card" data-aos="zoom-in-up" data-aos-duration="2000">
+      <a href="https://zharhosting88.github.io/AbsenSiswa/Absensi" target="_blank">
+      <i class="fa-solid fa-mobile-screen-button"></i><h3>Aplikasi Mobile</h3><p>Web absensi siswa/Aplikasi Absensi interaktif</p>
+      </a>
+      </div>
+    <div class="card" data-aos="zoom-in-up" data-aos-duration="2000">
+      <a href="https://zharhosting88.github.io/zharBot/Bot2" target="_blank">
+      <i class="fa-solid fa-robot"></i><h3>Chatbot AI</h3><p>kecerdasan buatan.</p>
+      </a>
+      </div>
+      <p align="justify" data-aos="zoom-in" data-aos-duration="2000">
+        jika banyak kekurangannya mohon di maaf kan dan dimaklumi, karna masih dalam tahap pembelajaran
+      </p>
+  </div>
+</section>
+
+<section class="skills" data-aos="zoom-in-up" data-aos-duration="2000">
+  <h2><i class="fas fa-brain"></i> Skill guru</h2>
+  <div class="skill-container">
+    <div class="skill"><i class="fas fa-book"></i><p>bahasa indonesia</p></div>
+    <div class="skill"><i class="fas fa-feather-alt"></i><p>bahasa arab</p></div>
+    <div class="skill"><i class="fas fa-language"></i><p>bahasa inggris</p></div>
+    <div class="skill"><i class="fas fa-paint-brush"></i><p>tgm</p></div>
+    <div class="skill"><i class="fas fa-code"></i><p>Programming</p></div>
+    <div class="skill"><i class="fas fa-square-root-alt"></i><p>mtk</p></div>
+    <div class="skill"><i class="fas fa-university"></i><p>pkn</p></div>
+    <div class="skill"><i class="fas fa-landmark"></i><p>sejarah</p></div>
+    <div class="skill"><i class="fas fa-lightbulb"></i><p>kwr</p></div>
+    <div class="skill"><i class="fas fa-praying-hands"></i><p>pai</p></div>
+  </div>
+</section>
+
+<section class="quotes" data-aos="zoom-in-up" data-aos-duration="2000">
+  <blockquote>“cinnta belajar, cinta berbagi. bersama kita membangun masa depan.”</blockquote>
+  <blockquote>“berani mencoba, berani gagal, berani bangkit, itulah jiwa pelajar sejati.”</blockquote>
+</section>
+
+<footer>
+  <p>© 2025 SMK Tunas Pemuda | Dibuat oleh Tim RPL</p>
+  <div>
+    <a href="https://www.tiktok.com/@_xii.rpl2?_r=1&_t=ZS-91CRAcFP0RW"><i class="fa-brands fa-tiktok"></i></a>
+    <a href="https://www.instagram.com/_xii.rpl2?igsh=dHBsY3l6cW1qZGY3"><i class="fa-brands fa-instagram"></i></a>
+    <a href="https://github.com/zharhosting88"><i class="fa-brands fa-github"></i></a>
+    <a href="https://youtube.com/@tunaspemuda?si=_qAeQIGVGTKdBzFJ"><i class="fa-brands fa-youtube"></i></a>
+  </div>
+</footer>
+
+<script>
+window.addEventListener('load',()=>{
+  setTimeout(()=>{
+    document.getElementById('loading').classList.add('hide');
+  },3000);
+});
+
+const sections=document.querySelectorAll('section');
+window.addEventListener('scroll',()=>{
+  const trigger=window.innerHeight*0.8;
+  sections.forEach(sec=>{
+    const top=sec.getBoundingClientRect().top;
+    if(top<trigger){sec.classList.add('show');}
+  });
+});
+</script>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js">  
+</script> 
+<script>
+  AOS.init();  
+</script>
+</body>
+</html>
